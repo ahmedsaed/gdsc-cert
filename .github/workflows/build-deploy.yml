@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Cache node modules
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: |
           **/.next
@@ -27,7 +27,7 @@ jobs:
           ${{ runner.os }}-build-
 
     - name: Install Node.js 21
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: 21.x
 
@@ -43,7 +43,7 @@ jobs:
 
     - name: Deploy
       if: github.ref == 'refs/heads/main'
-      uses: FirebaseExtended/action-hosting-deploy@v0
+      uses: FirebaseExtended/action-hosting-deploy@v0.10.0
       with:
         repoToken: '${{ secrets.ACCESS_TOKEN }}'
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GDSC_CERT }}'
@@ -53,7 +53,7 @@ jobs:
 
     - name: Deploy preview
       if: github.ref != 'refs/heads/main'
-      uses: FirebaseExtended/action-hosting-deploy@v0
+      uses: FirebaseExtended/action-hosting-deploy@v0.10.0
       with:
         repoToken: '${{ secrets.ACCESS_TOKEN }}'
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GDSC_CERT }}'
